@@ -1,7 +1,7 @@
 'use strict';
 
 var loopback = require('loopback');
-require('morgan');
+var morgan = require('morgan');
 var boot = require('loopback-boot');
 
 var app = (module.exports = loopback());
@@ -20,6 +20,8 @@ app.start = function() {
 };
 
 // Bootstrap the application, configure models, datasources and middleware.
+app.middleware('routes:before', morgan('dev'));
+
 // Sub-apps like REST API are mounted via boot scripts.
 boot(app, __dirname, function(err) {
   if (err) throw err;
